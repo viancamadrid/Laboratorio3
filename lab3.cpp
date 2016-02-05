@@ -5,8 +5,8 @@ using std::cout;
 using std::cin;
 using std::endl;
 
-void ordenar(double []);
-void imprimir(double []);
+void ordenar(int []);
+void imprimir(int []);
 
 int main( int argc, char*argv[]){
 	int opcion=0;
@@ -16,22 +16,34 @@ int main( int argc, char*argv[]){
 		srand(time(NULL));
 		int num=-500+rand()%((500+1)-(-500));
 		int adivinar=600;
-		double scores[10];
+		int scores[10]={-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
 		int intentos=0;
 		int seguir=0;
-		for(int i=0; i<10; i++){	
+		int i=0;
+		//int temp=0;
+		cout<<"-----------"<<num<<"--------------"<<endl;
+		while(seguir==0){	
+			//int num=-500+rand()%((500+1)-(-500));
 			while(adivinar!=num){
+				intentos++;
 				cout<<"Ingrese Numero: ";
 				cin>>adivinar;
-				intentos++;
+				//intentos++;
+				//if(adivinar==num)
+					//temp=1;	
 			}
 			scores[i]=intentos;
+			i++;
 			intentos=0;
-			cout<<"Adivinar Otro Numero:\n0. Si\n1. No";
+			adivinar=600;
+			cout<<"Seguir? 0. Si 1. No: ";
 			cin>>seguir;
-			if(seguir==1)
-				break;
-		}	
+			//if(seguir==1)
+				//break;
+		}
+		ordenar(scores);
+		cout<<"---Tabla de Highscore---"<<endl;
+		imprimir(scores);	
 	}
 	if(opcion==2){
 
@@ -39,8 +51,8 @@ int main( int argc, char*argv[]){
 	return 0;
 }
 
-void ordenar(double scores[]){
-	double temp;
+void ordenar(int scores[]){
+	int  temp;
 	for(int i=0; i<10; i++){
 		for(int j=0; j<10; j++){
 			if(scores[j]<scores[i]){
@@ -52,7 +64,7 @@ void ordenar(double scores[]){
 	}
 }
 
-void imprimir(double scores[]){
+void imprimir(int scores[]){
 	for(int i=0; i<10; i++){
 		cout<<"Posicion "<<i+1<<": "<<scores[i]<<endl; 
 	}
